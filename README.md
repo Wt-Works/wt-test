@@ -6,6 +6,7 @@ Wt test - The WebToolkit for C++ programmers
 
 * http://www.webtoolkit.eu/wt
 * http://redmine.webtoolkit.eu/boards/1/topics/5159
+* /usr/lib/Wt/examples
 
 
 
