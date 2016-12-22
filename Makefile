@@ -13,3 +13,6 @@ clean:
 	- rm hello
 	- rm KanBanUi
 	- rm View.o
+
+
+# ./KanBanUi  --docroot . --http-address 0.0.0.0 --http-port 9090

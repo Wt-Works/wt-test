@@ -9,6 +9,13 @@ Wt test - The WebToolkit for C++ programmers
 * /usr/lib/Wt/examples
 
 
+## Usage
+
+1. get clone
+2. ln -s /usr/share/Wt/resources resources
+3. make clean available
+4. ./KanBanUi  --docroot . --http-address 0.0.0.0 --http-port 9090
+
 
 Test:
 make
