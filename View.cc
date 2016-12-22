@@ -38,14 +38,26 @@ View::View(const Wt::WEnvironment& env)
   // Things are getting added to the hbox.
   Wt::WTabWidget *tabW = new Wt::WTabWidget(container);
   tabW->addTab(new Wt::WTextArea("This is the contents of the first tab."),
-	     "First", Wt::WTabWidget::PreLoading);
+	     "Capture", Wt::WTabWidget::PreLoading);
   tabW->addTab(new Wt::WTextArea("The contents of the tabs are pre-loaded in"
 			       " the browser to ensure swift switching."),
-	     "Preload", Wt::WTabWidget::PreLoading);
+	     "Chunk", Wt::WTabWidget::PreLoading);
   tabW->addTab(new Wt::WTextArea("You could change any other style attribute of the"
 			       " tab widget by modifying the style class."
 			       " The style class 'trhead' is applied to this tab."),
-	     "Style", Wt::WTabWidget::PreLoading)->setStyleClass("trhead");
+	     "Plan", Wt::WTabWidget::PreLoading);
+  tabW->addTab(new Wt::WTextArea("The contents of the tabs are pre-loaded in"
+     			       " the browser to ensure swift switching."),
+     	     "Schedule", Wt::WTabWidget::PreLoading);
+  tabW->addTab(new Wt::WTextArea("The contents of the tabs are pre-loaded in"
+             			       " the browser to ensure swift switching."),
+             	     "Execute", Wt::WTabWidget::PreLoading);
+  tabW->addTab(new Wt::WTextArea("The contents of the tabs are pre-loaded in"
+                     			       " the browser to ensure swift switching."),
+                     	     "Complete", Wt::WTabWidget::PreLoading);
+  tabW->addTab(new Wt::WTextArea("The contents of the tabs are pre-loaded in"
+                             			       " the browser to ensure swift switching."),
+                             	     "Celebrate", Wt::WTabWidget::PreLoading);
   tabW->setStyleClass("tabwidget");
   hbox->addWidget(tabW);
   root()->addWidget(container);
