@@ -11,6 +11,7 @@
 #include <Wt/WLineEdit>
 #include <Wt/WTabWidget>
 #include <Wt/WTextArea>
+#include <Wt/WBorderLayout>
 
 // https://www.webtoolkit.eu/wt/doc/reference/html/classWt_1_1WApplication.html#ae29a843f4d50159b17abfa9503c389db
 // wApp->log("notice") << "User " << userName << " logged in successfully.";
@@ -28,10 +29,37 @@ View::View(const Wt::WEnvironment& env)
   //useStyleSheet("example1.css");
 
 
-  log("notice") << "Test";
-  Wt::WContainerWidget *container = new Wt::WContainerWidget();
-  //container->setStyleClass("yellow-box");
+  log("info") << "Test";
 
+  // This is the container for the full screen.
+  Wt::WContainerWidget *pScreenContainer = new Wt::WContainerWidget();
+  root()->addWidget(pScreenContainer);
+  Wt::WBorderLayout *pBorderLayout = new Wt::WBorderLayout();
+  pScreenContainer->setLayout(pBorderLayout);
+
+  // Create the container for the North field
+  Wt::WContainerWidget *pNorthContainer = new Wt::WContainerWidget();
+  //container->setStyleClass("yellow-box");
+  // root()->addWidget(pNorthContainer);
+  CreateTopTab(this, pNorthContainer);
+
+  pBorderLayout->addWidget(pNorthContainer, Wt::WBorderLayout::North);
+
+  const char *cell = "{1} item";
+  Wt::WText *item = new Wt::WText(Wt::WString(cell).arg("South"));
+  item->setStyleClass("green-box");
+  pBorderLayout->addWidget(item, Wt::WBorderLayout::South);
+
+  item = new Wt::WText(Wt::WString(cell).arg("Center"));
+  item->setStyleClass("green-box");
+  pBorderLayout->addWidget(item, Wt::WBorderLayout::Center);
+} // end
+
+
+/**
+ */
+Wt::WHBoxLayout *View::CreateTopTab(Wt::WApplication *app, Wt::WContainerWidget *container) {
+  //TODO N create destructors that delete all the 'new()' operations.
   Wt::WHBoxLayout *hbox = new Wt::WHBoxLayout();
   container->setLayout(hbox);
 
@@ -60,7 +88,7 @@ View::View(const Wt::WEnvironment& env)
                              	     "Celebrate", Wt::WTabWidget::PreLoading);
   tabW->setStyleClass("tabwidget");
   hbox->addWidget(tabW);
-  root()->addWidget(container);
 
-
-}
+  app->log("info") << "DDD CreateTopTab() done";
+  return(hbox);
+} // end CreateTopTab

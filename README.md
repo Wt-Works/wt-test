@@ -31,6 +31,7 @@ Login screen/authentication screen
 * Status bar(at the bottom).
 * Menu bar(at the top)?
 * Entry fields
+* DB interface, start with SQL
 * Submit buttons
 * Help text
 
