@@ -11,7 +11,8 @@
 #include <Wt/WLineEdit>
 #include <Wt/WTabWidget>
 #include <Wt/WTextArea>
-#include <Wt/WBorderLayout>
+#include <Wt/WGridLayout>
+#include <Wt/WLength>
 
 // https://www.webtoolkit.eu/wt/doc/reference/html/classWt_1_1WApplication.html#ae29a843f4d50159b17abfa9503c389db
 // wApp->log("notice") << "User " << userName << " logged in successfully.";
@@ -21,6 +22,13 @@
 
 // The resource files in /usr/share/Wt/resources has to be available.
 
+/**
+  Constructor for View
+
+  This will layout the GUI.
+  IT uses the gridlayout, because it can actually stretch the gui to fill the
+    screen/browser window.
+ */
 View::View(const Wt::WEnvironment& env)
     : Wt::WApplication(env)
 {
@@ -33,30 +41,38 @@ View::View(const Wt::WEnvironment& env)
 
   // This is the container for the full screen.
   Wt::WContainerWidget *pScreenContainer = new Wt::WContainerWidget();
+  pScreenContainer->resize(Wt::WLength::Auto, Wt::WLength::Auto);
+  // Add the primary container to the root widget?
   root()->addWidget(pScreenContainer);
-  Wt::WBorderLayout *pBorderLayout = new Wt::WBorderLayout();
-  pScreenContainer->setLayout(pBorderLayout);
+
+  Wt::WGridLayout *pScreenLayout = new Wt::WGridLayout();
+  pScreenContainer->setLayout(pScreenLayout);
+
 
   // Create the container for the North field
-  Wt::WContainerWidget *pNorthContainer = new Wt::WContainerWidget();
-  //container->setStyleClass("yellow-box");
-  // root()->addWidget(pNorthContainer);
-  CreateTopTab(this, pNorthContainer);
+  Wt::WContainerWidget *pMainContainer = new Wt::WContainerWidget();
+  CreateTopTab(this, pMainContainer);
 
-  pBorderLayout->addWidget(pNorthContainer, Wt::WBorderLayout::North);
+  // Add the main container to the screen layout
+  pScreenLayout->addWidget(pMainContainer, 0, 0);
 
-  const char *cell = "{1} item";
-  Wt::WText *item = new Wt::WText(Wt::WString(cell).arg("South"));
+
+
+  Wt::WText *item = new Wt::WText("Status text");
   item->setStyleClass("green-box");
-  pBorderLayout->addWidget(item, Wt::WBorderLayout::South);
+  pScreenLayout->addWidget(item, 1,0);
 
-  item = new Wt::WText(Wt::WString(cell).arg("Center"));
-  item->setStyleClass("green-box");
-  pBorderLayout->addWidget(item, Wt::WBorderLayout::Center);
+  /*
+       * Let row 1 and column 1 take the excess space.
+       */
+  pScreenLayout->setRowStretch(0, 0);
+  pScreenLayout->setColumnStretch(0, 0);
+
 } // end
 
 
 /**
+ * Create the Tab for the top part. It also create the container for each tab.
  */
 Wt::WHBoxLayout *View::CreateTopTab(Wt::WApplication *app, Wt::WContainerWidget *container) {
   //TODO N create destructors that delete all the 'new()' operations.
