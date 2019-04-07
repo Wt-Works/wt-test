@@ -11,7 +11,8 @@ public:
 
 private:
   Wt::WHBoxLayout *CreateTopTab(Wt::WApplication *app, Wt::WContainerWidget *container);
-  void DropDownSelectionChange(int nIndex);
+  void DropDownSelectionChangeOtherDropDown(int nIndex);
+  void DropDownSelectionChangeTab(int nIndex);
 };
 
 #endif

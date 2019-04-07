@@ -53,7 +53,8 @@ View::View(const Wt::WEnvironment& env)
 
 
   // Create the connection
-  cbSeries->activated().connect(this, &View::DropDownSelectionChange);
+  cbSeries->activated().connect(this, &View::DropDownSelectionChangeOtherDropDown);
+  cbSeries->activated().connect(this, &View::DropDownSelectionChangeTab);
   /* Signals connect to Slots.
   * You may specify up to 6 arguments which may be of arbitrary types that are Copyable, that may be passed through the signal to connected slots.
   *   https://www.webtoolkit.eu/wt/doc/reference/html/group__signalslot.html
@@ -73,6 +74,10 @@ View::View(const Wt::WEnvironment& env)
 } // end
 
 
-void View::DropDownSelectionChange(int nIndex) {
-  log("info") << "DropDownSelectionChange";
+void View::DropDownSelectionChangeOtherDropDown(int nIndex) {
+  log("info") << "DropDownSelectionChangeOtherDropDown";
+}
+
+void View::DropDownSelectionChangeTab(int nIndex) {
+  log("info") << "DropDownSelectionChangeTab";
 }
